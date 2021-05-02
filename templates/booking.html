@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        ul{
+            list-style: none;
+            padding-inline-start: 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>Book a new flight</h1>
+    <form action="" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <table>
+            {{ form.as_table }}
+        </table>
+        <br>
+        <button type="submit">Submit</button>
+    </form>
+    <br>
+    <form action="/view">
+        <button type="submit">View All Records</button>
+    </form>
+    <br>
+    <form action='/'>
+        <button type="submit">Homepage</button>
+    </form>
+</body>
+</html>

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>All Bookings</h1>
+    <table border='1' cellpadding='5'>
+        <tr>
+            <th>Full Name</th>
+            <th>Email</th>
+            <th>Address</th>
+            <th>Destination</th>
+            <th>Date</th>
+            <th>Travellers</th>
+            <th>Class</th>
+            <th>Budget(Rupees)</th>
+            <th>ID Proof</th>
+            <th>Additional Services</th>
+            <th>Student?</th>
+            <th>Update</th>
+            <th>Delete</th>
+        </tr>
+        {% for object in object_list %}
+        <tr>
+            <td>{{ object.full_name }}</td>
+            <td>{{ object.email }}</td>
+            <td>{{ object.address }}</td>
+            <td>{{ object.city }}</td>
+            <td>{{ object.date }}</td>
+            <td>{{ object.travellers }}</td>
+            <td class="class">{{ object.flight_class }}</td>
+            <td>{{ object.budget }}</td>
+            <td><img src="{{object.id_proof.url}}" height="150" width="150"></td>
+            <td class="additional">{{ object.additional }}</td>
+            <td class="student">{{ object.student }}</td>
+            <td><a href="../update/{{object.id}}">Update</a></td>
+            <td><a href="../delete/{{object.id}}">Delete</a></td>
+        </tr>
+        {% endfor %}
+    </table>
+    <br>
+    <form action="/create">
+        <button type="submit">Create a new record</button>
+    </form>
+    <br>
+    <form action='/'>
+        <button type="submit">Homepage</button>
+    </form>
+    <script>
+        var class_names = {
+            'B': 'Business',
+            'E': 'Economy',
+            'P': 'Premium Economy'
+        }
+        var additional_names = {
+            'F': 'Food',
+            'N': 'Non-Stop',
+            'R': 'Refundable'
+        }
+        var student_names = {
+            'True': 'Yes',
+            'False': 'No'
+        }
+        var class_element = document.getElementsByClassName('class')
+        var additional_element = document.getElementsByClassName('additional')
+        var student_element = document.getElementsByClassName('student')
+        for(var i = 0; i < class_element.length; i++) {
+            class_element[i].innerHTML = class_names[class_element[i].innerHTML]
+            student_element[i].innerHTML = student_names[student_element[i].innerHTML]
+            var additionals = additional_element[i].innerHTML.split(',')
+            for(var j = 0; j < additionals.length; j++) {
+                additionals[j] = additional_names[additionals[j]]
+            }
+            additional_element[i].innerHTML = additionals.join()
+        }
+
+    </script>
+</body>
+</html>
