@@ -1,4 +1,5 @@
 from django import forms
+from datetime import date
 from booking.models import Booking
 
 class BookingForm(forms.ModelForm):
@@ -22,7 +23,7 @@ class BookingForm(forms.ModelForm):
         }
 
         widgets = {
-            'date': forms.DateInput(attrs = {'type': 'date'}),
+            'date': forms.DateInput(attrs = {'type': 'date', 'min': str(date.today())}),
             'flight_class': forms.RadioSelect(),
             'additional': forms.CheckboxSelectMultiple(choices = ADDITIONAL_CHOICES)
         }
